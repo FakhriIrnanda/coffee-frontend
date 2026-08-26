@@ -11,7 +11,7 @@ import { fadeUp, stagger } from '../lib/animations';
 interface CartItem {
     id: number;
     quantity: number;
-    product: { id: number; name: string; price: number; image: string };
+    product: { id: number; name: string; price: number; image: string; image_url: string | null };
 }
 
 const formatRupiah = (amount: number) =>
@@ -77,7 +77,7 @@ export default function CheckoutPage() {
                                             <div className="flex items-center gap-3">
                                                 <div className="w-12 h-12 bg-amber-100 rounded-lg overflow-hidden">
                                                     {item.product.image ? (
-                                                        <img src={`http://coffee-backend.test/storage/${item.product.image}`} alt={item.product.name} className="w-full h-full object-cover" />
+                                                        <img src={item.product.image_url ?? ''} alt={item.product.name} className="w-full h-full object-cover" />
                                                     ) : (
                                                         <div className="w-full h-full flex items-center justify-center">☕</div>
                                                     )}

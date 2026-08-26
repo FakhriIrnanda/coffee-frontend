@@ -14,6 +14,7 @@ interface Product {
     price: number;
     description: string;
     image: string;
+    image_url: string | null;
     stock: number;
     category: { id: number; name: string };
 }
@@ -148,7 +149,7 @@ export default function MenuPage() {
                                         <div className="h-52 bg-amber-100 overflow-hidden">
                                             {product.image ? (
                                                 <img
-                                                    src={`http://coffee-backend.test/storage/${product.image}`}
+                                                    src={product.image_url ?? ''}
                                                     alt={product.name}
                                                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                                                 />

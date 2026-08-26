@@ -21,7 +21,7 @@ interface Order {
         id: number;
         quantity: number;
         price: number;
-        product: { name: string; image: string };
+        product: { name: string; image: string; image_url: string | null };
     }[];
 }
 
@@ -170,7 +170,7 @@ export default function OrderDetailPage() {
                                         <div className="flex items-center gap-3">
                                             <div className="w-10 h-10 bg-amber-100 rounded-lg overflow-hidden">
                                                 {item.product.image ? (
-                                                    <img src={`http://coffee-backend.test/storage/${item.product.image}`} alt={item.product.name} className="w-full h-full object-cover" />
+                                                    <img src={item.product.image_url ?? ''} alt={item.product.name} className="w-full h-full object-cover" />
                                                 ) : (
                                                     <div className="w-full h-full flex items-center justify-center text-lg">☕</div>
                                                 )}

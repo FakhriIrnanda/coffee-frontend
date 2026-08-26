@@ -12,7 +12,7 @@ import { fadeUp, stagger, slideLeft } from '../lib/animations';
 interface CartItem {
     id: number;
     quantity: number;
-    product: { id: number; name: string; price: number; image: string; stock: number };
+    product: { id: number; name: string; price: number; image: string; image_url: string | null; stock: number };
 }
 
 const formatRupiah = (amount: number) =>
@@ -84,7 +84,7 @@ export default function CartPage() {
                                 >
                                     <div className="w-20 h-20 bg-amber-100 rounded-xl overflow-hidden flex-shrink-0">
                                         {item.product.image ? (
-                                            <img src={`http://coffee-backend.test/storage/${item.product.image}`} alt={item.product.name} className="w-full h-full object-cover" />
+                                            <img src={item.product.image_url ?? ''} alt={item.product.name} className="w-full h-full object-cover" />
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center text-3xl">☕</div>
                                         )}

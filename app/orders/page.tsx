@@ -19,7 +19,7 @@ interface Order {
     items: {
         id: number;
         quantity: number;
-        product: { id: number; name: string; image: string };
+        product: { id: number; name: string; image: string; image_url: string | null };
     }[];
     reviews: { id: number; product_id: number }[];
 }
@@ -216,7 +216,7 @@ export default function OrdersPage() {
                                                     <div className="w-10 h-10 bg-amber-100 rounded-lg overflow-hidden flex-shrink-0">
                                                         {item.product?.image ? (
                                                             <img
-                                                                src={`http://coffee-backend.test/storage/${item.product.image}`}
+                                                                src={item.product.image_url ?? ''}
                                                                 alt={item.product.name}
                                                                 className="w-full h-full object-cover"
                                                             />

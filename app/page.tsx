@@ -15,6 +15,7 @@ interface Product {
     price: number;
     description: string;
     image: string;
+    image_url: string | null;
     category: { name: string };
 }
 
@@ -212,7 +213,7 @@ export default function Home() {
                                         <div className="h-56 bg-amber-100 overflow-hidden">
                                             {product.image ? (
                                                 <img
-                                                    src={`http://coffee-backend.test/storage/${product.image}`}
+                                                    src={product.image_url ?? ''}
                                                     alt={product.name}
                                                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                                                 />

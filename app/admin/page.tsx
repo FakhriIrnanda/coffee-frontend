@@ -11,6 +11,7 @@ interface Product {
     price: number;
     stock: number;
     image: string;
+    image_url: string | null;
     is_active: boolean;
     is_featured: boolean;
     category: { id: number; name: string };
@@ -199,7 +200,7 @@ export default function AdminPage() {
             is_featured: product.is_featured,
             is_active: product.is_active,
         });
-        setImagePreview(product.image ? `http://coffee-backend.test/storage/${product.image}` : '');
+        setImagePreview(product.image_url ?? '');
         setImageFile(null);
         setShowProductModal(true);
     };
@@ -315,7 +316,8 @@ export default function AdminPage() {
             params.append('end_date', exportEndDate);
         }
         const token = localStorage.getItem('token');
-        const url = `http://coffee-backend.test/api/admin/export/orders?${params}`;
+        const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://coffee-backend.test/api';
+        const url = `${apiBaseUrl}/admin/export/orders?${params}`;
         const res = await fetch(url, { headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' } });
         const blob = await res.blob();
         const link = document.createElement('a');
@@ -555,7 +557,7 @@ export default function AdminPage() {
                                         <div key={product.id} className="bg-white rounded-2xl shadow-sm overflow-hidden">
                                             <div className="h-40 bg-amber-100 overflow-hidden">
                                                 {product.image ? (
-                                                    <img src={`http://coffee-backend.test/storage/${product.image}`} alt={product.name} className="w-full h-full object-cover" />
+                                                    <img src={product.image_url ?? ''} alt={product.name} className="w-full h-full object-cover" />
                                                 ) : (
                                                     <div className="w-full h-full flex items-center justify-center text-5xl">☕</div>
                                                 )}

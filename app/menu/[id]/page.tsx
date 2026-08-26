@@ -14,6 +14,7 @@ interface Product {
     price: number;
     description: string;
     image: string;
+    image_url: string | null;
     stock: number;
     category: { name: string };
 }
@@ -128,7 +129,7 @@ export default function ProductDetailPage() {
                 >
                     <motion.div variants={fadeUp} className="h-80 md:h-full bg-amber-100 overflow-hidden">
                         {product.image ? (
-                            <img src={`http://coffee-backend.test/storage/${product.image}`} alt={product.name} className="w-full h-full object-cover" />
+                            <img src={product.image_url ?? ''} alt={product.name} className="w-full h-full object-cover" />
                         ) : (
                             <div className="w-full h-full flex items-center justify-center text-8xl">☕</div>
                         )}
