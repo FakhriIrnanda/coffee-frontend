@@ -15,6 +15,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://mercyscoffee.netlify.app"),
     title: "Mercys Coffee",
     description: "A warm place to enjoy your favorite coffee",
 };
